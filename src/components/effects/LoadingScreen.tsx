@@ -3,11 +3,25 @@
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
+const loadingLines = [
+  { text: '> Initializing portfolio...', delay: 0 },
+  { text: '> Loading assets [████████████] 100%', delay: 400 },
+  { text: '> Compiling experiences...', delay: 800 },
+  { text: '> Rendering UI components...', delay: 1100 },
+  { text: '> System ready.', delay: 1500 },
+]
+
 export function LoadingScreen() {
   const [isLoading, setIsLoading] = useState(true)
+  const [visibleLines, setVisibleLines] = useState<number[]>([])
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 2000)
+    loadingLines.forEach((line, i) => {
+      setTimeout(() => {
+        setVisibleLines(prev => [...prev, i])
+      }, line.delay)
+    })
+    const timer = setTimeout(() => setIsLoading(false), 2200)
     return () => clearTimeout(timer)
   }, [])
 
@@ -16,8 +30,8 @@ export function LoadingScreen() {
       {isLoading && (
         <motion.div
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5, ease: 'easeInOut' }}
+          exit={{ opacity: 0, scale: 0.98, filter: 'blur(10px)' }}
+          transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-background"
         >
           <div className="relative flex flex-col items-center">
@@ -46,23 +60,28 @@ export function LoadingScreen() {
               />
             </div>
 
-            {/* Name */}
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="mt-8 text-sm font-mono text-white/50 tracking-widest uppercase"
-            >
-              Vaibhav Deshmukh
-            </motion.p>
+            {/* Terminal-style loading text */}
+            <div className="mt-8 font-mono text-xs space-y-1 min-w-[280px]">
+              {loadingLines.map((line, i) => (
+                <motion.p
+                  key={i}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={visibleLines.includes(i) ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
+                  transition={{ duration: 0.3 }}
+                  className={i === loadingLines.length - 1 ? 'text-green-400' : 'text-white/40'}
+                >
+                  {line.text}
+                </motion.p>
+              ))}
+            </div>
 
             {/* Loading bar */}
-            <div className="mt-4 w-48 h-0.5 bg-white/10 rounded-full overflow-hidden">
+            <div className="mt-6 w-48 h-0.5 bg-white/10 rounded-full overflow-hidden">
               <motion.div
                 className="h-full bg-gradient-to-r from-electric-blue via-electric-purple to-electric-cyan"
                 initial={{ width: '0%' }}
                 animate={{ width: '100%' }}
-                transition={{ duration: 1.8, ease: 'easeInOut' }}
+                transition={{ duration: 2, ease: 'easeInOut' }}
               />
             </div>
           </div>

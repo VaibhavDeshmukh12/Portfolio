@@ -125,8 +125,8 @@ export function Contact() {
                 >
                   <link.icon size={24} className="text-white/40 group-hover:text-electric-blue transition-colors mx-auto" />
                 </motion.div>
-                <p className="text-sm font-medium text-white/80 mt-3">{link.label}</p>
-                <p className="text-xs text-white/40 mt-1">{link.detail}</p>
+                <p className="text-sm font-medium text-white/80 mt-3 text-center">{link.label}</p>
+                <p className="text-xs text-white/40 mt-1 text-center truncate opacity-0 group-hover:opacity-100 transition-opacity duration-300" title={link.detail}>{link.detail}</p>
               </motion.a>
             ))}
           </div>

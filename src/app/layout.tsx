@@ -27,6 +27,28 @@ export const metadata: Metadata = {
   },
 }
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Vaibhav Deshmukh',
+  jobTitle: 'Associate Software Engineer',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'PTC Software',
+  },
+  url: 'https://vaibhavdeshmukh.dev',
+  sameAs: [
+    'https://github.com/VaibhavDeshmukh12',
+    'https://linkedin.com/in/vaibhav-deshmukh-30428622a',
+    'https://leetcode.com/u/vaibhav_64/',
+  ],
+  knowsAbout: ['Software Engineering', 'React', 'Next.js', 'TypeScript', 'ThingWorx', 'Enterprise Software', 'Full Stack Development'],
+  alumniOf: {
+    '@type': 'EducationalOrganization',
+    name: 'University of Pune',
+  },
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -34,7 +56,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans bg-background text-foreground overflow-x-hidden`}>
+        <a href="#home" className="skip-to-content">Skip to content</a>
         <SmoothScrollProvider>
           {children}
         </SmoothScrollProvider>

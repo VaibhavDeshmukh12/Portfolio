@@ -3,11 +3,20 @@
 import { motion } from 'framer-motion'
 import { ArrowDown, Github, Linkedin, Mail, Code2, MessageCircle } from 'lucide-react'
 import dynamic from 'next/dynamic'
+import { useMemo } from 'react'
 import { siteConfig, rotatingTitles } from '@/lib/constants'
 import { TypingAnimation } from '@/components/ui/typing-animation'
 import { MagneticButton } from '@/components/ui/magnetic-button'
 import { GradientMesh } from '@/components/effects/GradientMesh'
 import { staggerContainer, staggerItem, fadeInUp } from '@/lib/animations'
+
+function getGreeting(): string {
+  const hour = new Date().getHours()
+  if (hour >= 5 && hour < 12) return 'Good morning'
+  if (hour >= 12 && hour < 17) return 'Good afternoon'
+  if (hour >= 17 && hour < 21) return 'Good evening'
+  return 'Hello, night owl'
+}
 
 const HeroScene = dynamic(
   () => import('@/components/three/HeroScene').then(mod => ({ default: mod.HeroScene })),
@@ -23,6 +32,8 @@ const socialLinks = [
 ]
 
 export function Hero() {
+  const greeting = useMemo(() => getGreeting(), [])
+
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* 3D Background */}
@@ -43,7 +54,7 @@ export function Hero() {
           <motion.div variants={staggerItem} className="mb-4">
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.05] border border-white/[0.1] text-sm text-white/60">
               <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-              Available for opportunities
+              {greeting} — Available for opportunities
             </span>
           </motion.div>
 

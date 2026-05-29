@@ -2,7 +2,7 @@ export const siteConfig = {
   name: 'Vaibhav Deshmukh',
   role: 'Associate Software Engineer',
   company: 'PTC Software',
-  email: 'contact.dvaibhav@gmail.com',
+  email: 'deshmukhvaibhav499@gmail.com',
   location: 'Pune, India',
   tagline: 'Building scalable enterprise systems, immersive user experiences, and intelligent software solutions.',
   resumeUrl: '/resume-placeholder.pdf',
@@ -10,7 +10,7 @@ export const siteConfig = {
     github: 'https://github.com/VaibhavDeshmukh12',
     linkedin: 'https://linkedin.com/in/vaibhav-deshmukh-30428622a',
     leetcode: 'https://leetcode.com/u/vaibhav_64/',
-    email: 'mailto:contact.dvaibhav@gmail.com',
+    email: 'mailto:deshmukhvaibhav499@gmail.com',
   },
 }
 
