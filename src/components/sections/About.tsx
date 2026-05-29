@@ -41,7 +41,7 @@ export function About() {
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -40 }}
               transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1] }}
             >
-              <span className="inline-block text-sm font-mono text-electric-blue tracking-wider uppercase px-4 py-1.5 rounded-full border border-electric-blue/20 bg-electric-blue/5">
+              <span className="inline-block text-sm font-mono tracking-wider uppercase px-4 py-1.5 rounded-full border bg-white/[0.03]" style={{ color: 'rgb(var(--accent-primary))', borderColor: 'rgba(var(--accent-primary), 0.2)' }}>
                 <TextScramble text="About Me" delay={0.3} />
               </span>
             </motion.div>
@@ -62,7 +62,7 @@ export function About() {
             <div className="mt-6 space-y-4">
               {[
                 'I am passionate about building scalable software systems, enterprise applications, modern web experiences, and full-stack solutions.',
-                <>Currently working at <span className="text-electric-blue font-medium">PTC Software</span> as an Associate Software Engineer, I contribute to ThingWorx Composer, enterprise mashup development, dynamic UI systems, and performance optimization for industrial IoT platforms.</>,
+                <>Currently working at <span className="font-medium" style={{ color: 'rgb(var(--accent-primary))' }}>PTC Software</span> as an Associate Software Engineer, I contribute to ThingWorx Composer, enterprise mashup development, dynamic UI systems, and performance optimization for industrial IoT platforms.</>,
                 'I continuously explore system design, data structures, full stack architecture, and performance engineering to build exceptional products.',
               ].map((text, i) => (
                 <motion.p

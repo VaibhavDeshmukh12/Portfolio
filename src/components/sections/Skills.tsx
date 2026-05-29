@@ -35,12 +35,12 @@ function SkillCard({ skill, index, isActive }: { skill: { name: string; level: n
           whileHover={{ y: -6, scale: 1.03, transition: { duration: 0.2 } }}
         >
           {/* Background glow on hover */}
-          <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-br from-electric-blue/8 via-transparent to-electric-purple/8" />
+          <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" style={{ background: 'linear-gradient(to bottom right, rgba(var(--accent-primary), 0.08), transparent, rgba(var(--accent-secondary), 0.08))' }} />
           
           {/* Animated border shimmer */}
           <motion.div
             className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-            style={{ background: 'conic-gradient(from 0deg, transparent, rgba(59,130,246,0.15), transparent, rgba(139,92,246,0.15), transparent)' }}
+            style={{ background: 'conic-gradient(from 0deg, transparent, rgba(var(--accent-primary), 0.15), transparent, rgba(var(--accent-secondary), 0.15), transparent)' }}
             animate={{ rotate: [0, 360] }}
             transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
           />
@@ -77,7 +77,7 @@ function SkillCard({ skill, index, isActive }: { skill: { name: string; level: n
               {/* Glowing tip at end of progress */}
               <motion.div
                 className="absolute top-0 h-full w-3 rounded-full blur-sm"
-                style={{ background: 'rgba(59, 130, 246, 0.8)' }}
+                style={{ background: 'rgba(var(--accent-primary), 0.8)' }}
                 initial={{ left: 0, opacity: 0 }}
                 animate={isActive && isInView 
                   ? { left: `calc(${skill.level}% - 6px)`, opacity: [0, 1, 0.6] }
@@ -114,8 +114,8 @@ export function Skills() {
         className="absolute inset-0 opacity-30"
         style={{ x: backgroundX }}
       >
-        <div className="absolute top-1/3 left-1/3 w-96 h-96 bg-electric-cyan/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/3 right-1/3 w-96 h-96 bg-electric-blue/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/3 left-1/3 w-96 h-96 rounded-full blur-3xl" style={{ background: 'rgba(var(--accent-tertiary), 0.1)' }} />
+        <div className="absolute bottom-1/3 right-1/3 w-96 h-96 rounded-full blur-3xl" style={{ background: 'rgba(var(--accent-primary), 0.1)' }} />
       </motion.div>
 
       {/* Floating particles */}
@@ -133,7 +133,8 @@ export function Skills() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="inline-block text-sm font-mono text-electric-cyan tracking-wider uppercase px-4 py-1.5 rounded-full border border-electric-cyan/20 bg-electric-cyan/5"
+            className="inline-block text-sm font-mono tracking-wider uppercase px-4 py-1.5 rounded-full border bg-white/[0.03]"
+            style={{ color: 'rgb(var(--accent-tertiary))', borderColor: 'rgba(var(--accent-tertiary), 0.2)' }}
           >
             <TextScramble text="Skills" delay={0.2} />
           </motion.span>
@@ -173,7 +174,8 @@ export function Skills() {
               {activeCategory === category.id && (
                 <motion.div
                   layoutId="activeSkillTab"
-                  className="absolute inset-0 bg-gradient-to-r from-electric-blue/10 to-electric-purple/10 rounded-full border border-white/[0.15] shadow-[0_0_12px_rgba(59,130,246,0.1)]"
+                  className="absolute inset-0 rounded-full border border-white/[0.15]"
+                  style={{ background: 'linear-gradient(to right, rgba(var(--accent-primary), 0.1), rgba(var(--accent-secondary), 0.1))', boxShadow: '0 0 12px rgba(var(--accent-primary), 0.1)' }}
                   transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                 />
               )}
@@ -191,7 +193,8 @@ export function Skills() {
               {activeCategory === category.id && (
                 <motion.div
                   layoutId="skillTabDot"
-                  className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-electric-cyan"
+                  className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full"
+                  style={{ background: 'rgb(var(--accent-tertiary))' }}
                   transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                 />
               )}

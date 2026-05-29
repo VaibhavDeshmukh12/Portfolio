@@ -59,7 +59,7 @@ export function Footer() {
               © {new Date().getFullYear()} Vaibhav Deshmukh
             </p>
             <p className="text-xs text-white/25 mt-1 flex items-center justify-end gap-1">
-              Built with <Heart size={10} className="text-electric-pink" /> using Next.js
+              Built with <Heart size={10} style={{ color: 'rgb(var(--accent-secondary))' }} /> using Next.js
             </p>
           </div>
         </div>

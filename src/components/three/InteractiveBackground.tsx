@@ -9,13 +9,24 @@ const CONNECTION_DISTANCE = 2.5
 const MOUSE_INFLUENCE_RADIUS = 3
 const MOUSE_REPEL_STRENGTH = 0.08
 
-function NeuralParticles() {
+function NeuralParticles({ accentColor }: { accentColor: string }) {
   const pointsRef = useRef<THREE.Points>(null)
   const linesRef = useRef<THREE.LineSegments>(null)
   const mousePos = useRef(new THREE.Vector2(0, 0))
   const mouse3D = useRef(new THREE.Vector3(0, 0, 0))
   const scrollProgress = useRef(0)
+  const accentRGB = useRef({ r: 0.23, g: 0.51, b: 0.96 })
   const { viewport } = useThree()
+
+  // Parse hex to normalized RGB
+  useEffect(() => {
+    const hex = accentColor.replace('#', '')
+    accentRGB.current = {
+      r: parseInt(hex.substring(0, 2), 16) / 255,
+      g: parseInt(hex.substring(2, 4), 16) / 255,
+      b: parseInt(hex.substring(4, 6), 16) / 255,
+    }
+  }, [accentColor])
 
   // Generate initial positions in a wide spread
   const { positions, velocities } = useMemo(() => {
@@ -79,11 +90,11 @@ function NeuralParticles() {
       0
     )
 
-    // Color shift based on scroll
+    // Color shift based on scroll + accent
     const scroll = scrollProgress.current
-    const colorR = 0.23 + scroll * 0.35  // blue → purple → pink
-    const colorG = 0.51 - scroll * 0.25
-    const colorB = 0.96 - scroll * 0.2
+    const colorR = accentRGB.current.r + scroll * 0.2
+    const colorG = accentRGB.current.g - scroll * 0.15
+    const colorB = accentRGB.current.b - scroll * 0.1
 
     // Update particles
     for (let i = 0; i < PARTICLE_COUNT; i++) {
@@ -191,7 +202,7 @@ function NeuralParticles() {
         </bufferGeometry>
         <pointsMaterial
           size={0.04}
-          color="#3b82f6"
+          color={accentColor}
           transparent
           opacity={0.8}
           sizeAttenuation
@@ -227,10 +238,11 @@ function NeuralParticles() {
 }
 
 // Floating energy orbs that pulse
-function EnergyOrbs() {
+function EnergyOrbs({ colors }: { colors: { primary: string; secondary: string; tertiary: string } }) {
   const orbsRef = useRef<THREE.Group>(null)
 
   const orbs = useMemo(() => {
+    const orbColors = [colors.primary, colors.secondary, colors.tertiary, colors.primary, colors.secondary, colors.tertiary]
     return Array.from({ length: 6 }, (_, i) => ({
       position: [
         (Math.random() - 0.5) * 14,
@@ -239,9 +251,9 @@ function EnergyOrbs() {
       ] as [number, number, number],
       scale: 0.3 + Math.random() * 0.5,
       speed: 0.5 + Math.random() * 0.5,
-      color: ['#3b82f6', '#8b5cf6', '#06b6d4', '#ec4899', '#60a5fa', '#a78bfa'][i],
+      color: orbColors[i],
     }))
-  }, [])
+  }, [colors])
 
   useFrame(({ clock }) => {
     if (!orbsRef.current) return
@@ -273,7 +285,7 @@ function EnergyOrbs() {
 }
 
 // Morphing wireframe geometry that slowly rotates
-function MorphingGeometry() {
+function MorphingGeometry({ color }: { color: string }) {
   const meshRef = useRef<THREE.Mesh>(null)
   const scrollRef = useRef(0)
 
@@ -305,7 +317,7 @@ function MorphingGeometry() {
     <mesh ref={meshRef} position={[5, 0, -5]}>
       <icosahedronGeometry args={[1, 1]} />
       <meshBasicMaterial
-        color="#8b5cf6"
+        color={color}
         wireframe
         transparent
         opacity={0.06}
@@ -316,7 +328,7 @@ function MorphingGeometry() {
 }
 
 // Second morphing shape on the other side
-function MorphingGeometry2() {
+function MorphingGeometry2({ color }: { color: string }) {
   const meshRef = useRef<THREE.Mesh>(null)
   const scrollRef = useRef(0)
 
@@ -345,7 +357,7 @@ function MorphingGeometry2() {
     <mesh ref={meshRef} position={[-6, -5, -4]}>
       <octahedronGeometry args={[1, 1]} />
       <meshBasicMaterial
-        color="#06b6d4"
+        color={color}
         wireframe
         transparent
         opacity={0.05}
@@ -357,10 +369,34 @@ function MorphingGeometry2() {
 
 export function InteractiveBackground() {
   const [mounted, setMounted] = useState(false)
+  const [accentColors, setAccentColors] = useState({ primary: '#3b82f6', secondary: '#8b5cf6', tertiary: '#06b6d4' })
 
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  // Watch CSS variable changes for accent color
+  useEffect(() => {
+    if (!mounted) return
+    const readColors = () => {
+      const style = getComputedStyle(document.documentElement)
+      const p = style.getPropertyValue('--accent-primary').trim()
+      const s = style.getPropertyValue('--accent-secondary').trim()
+      const t = style.getPropertyValue('--accent-tertiary').trim()
+      if (p) {
+        const toHex = (rgb: string) => {
+          const parts = rgb.split(',').map(v => parseInt(v.trim()))
+          return `#${parts.map(v => v.toString(16).padStart(2, '0')).join('')}`
+        }
+        setAccentColors({ primary: toHex(p), secondary: toHex(s), tertiary: toHex(t) })
+      }
+    }
+    readColors()
+    // Re-read when CSS vars change (MutationObserver on style attribute)
+    const observer = new MutationObserver(readColors)
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['style'] })
+    return () => observer.disconnect()
+  }, [mounted])
 
   if (!mounted) return null
 
@@ -376,10 +412,10 @@ export function InteractiveBackground() {
           eventSource={typeof document !== 'undefined' ? document.documentElement : undefined}
           eventPrefix="client"
         >
-          <NeuralParticles />
-          <EnergyOrbs />
-          <MorphingGeometry />
-          <MorphingGeometry2 />
+          <NeuralParticles accentColor={accentColors.primary} />
+          <EnergyOrbs colors={accentColors} />
+          <MorphingGeometry color={accentColors.secondary} />
+          <MorphingGeometry2 color={accentColors.tertiary} />
         </Canvas>
       </div>
     </div>

@@ -8,7 +8,7 @@ export function GradientMesh() {
       <motion.div
         className="absolute -top-1/2 -left-1/2 w-full h-full rounded-full"
         style={{
-          background: 'radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 60%)',
+          background: 'radial-gradient(circle, rgba(var(--accent-primary), 0.08) 0%, transparent 60%)',
         }}
         animate={{
           x: [0, 100, 0],
@@ -23,7 +23,7 @@ export function GradientMesh() {
       <motion.div
         className="absolute -bottom-1/2 -right-1/2 w-full h-full rounded-full"
         style={{
-          background: 'radial-gradient(circle, rgba(139, 92, 246, 0.08) 0%, transparent 60%)',
+          background: 'radial-gradient(circle, rgba(var(--accent-secondary), 0.08) 0%, transparent 60%)',
         }}
         animate={{
           x: [0, -80, 0],
@@ -38,7 +38,7 @@ export function GradientMesh() {
       <motion.div
         className="absolute top-1/4 right-1/4 w-[60%] h-[60%] rounded-full"
         style={{
-          background: 'radial-gradient(circle, rgba(6, 182, 212, 0.05) 0%, transparent 60%)',
+          background: 'radial-gradient(circle, rgba(var(--accent-tertiary), 0.05) 0%, transparent 60%)',
         }}
         animate={{
           x: [0, 50, -30, 0],

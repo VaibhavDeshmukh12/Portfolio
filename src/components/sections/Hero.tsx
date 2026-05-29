@@ -71,7 +71,7 @@ export function Hero() {
           <motion.div variants={staggerItem} className="mt-4 md:mt-6">
             <p className="text-lg md:text-xl text-white/60">
               {siteConfig.role} at{' '}
-              <span className="text-electric-blue font-medium">{siteConfig.company}</span>
+              <span className="font-medium" style={{ color: 'rgb(var(--accent-primary))' }}>{siteConfig.company}</span>
             </p>
           </motion.div>
 
@@ -98,21 +98,21 @@ export function Hero() {
           >
             <MagneticButton
               href="#projects"
-              className="bg-electric-blue/10 border-electric-blue/30 hover:bg-electric-blue/20"
+              className="border-white/20 hover:border-white/30"
             >
-              <span className="text-electric-blue">View Projects</span>
+              <span style={{ color: 'rgb(var(--accent-primary))' }}>View Projects</span>
             </MagneticButton>
             <MagneticButton
               href={siteConfig.resumeUrl}
-              className="bg-electric-purple/10 border-electric-purple/30 hover:bg-electric-purple/20"
+              className="border-white/20 hover:border-white/30"
             >
-              <span className="text-electric-purple">Download Resume</span>
+              <span style={{ color: 'rgb(var(--accent-secondary))' }}>Download Resume</span>
             </MagneticButton>
             <MagneticButton
               href="#contact"
-              className="bg-electric-cyan/10 border-electric-cyan/30 hover:bg-electric-cyan/20"
+              className="border-white/20 hover:border-white/30"
             >
-              <span className="text-electric-cyan">Contact Me</span>
+              <span style={{ color: 'rgb(var(--accent-tertiary))' }}>Contact Me</span>
             </MagneticButton>
           </motion.div>
 

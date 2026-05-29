@@ -12,9 +12,9 @@ function ExperienceCard({ exp, index }: { exp: typeof experiences[0]; index: num
   const isCardInView = useInView(cardRef, { once: false, margin: '-50px' })
 
   const colors = [
-    { accent: '#3b82f6', glow: 'rgba(59, 130, 246, 0.15)' },
-    { accent: '#8b5cf6', glow: 'rgba(139, 92, 246, 0.15)' },
-    { accent: '#06b6d4', glow: 'rgba(6, 182, 212, 0.15)' },
+    { accent: 'rgb(var(--accent-primary))', glow: 'rgba(var(--accent-primary), 0.15)' },
+    { accent: 'rgb(var(--accent-secondary))', glow: 'rgba(var(--accent-secondary), 0.15)' },
+    { accent: 'rgb(var(--accent-tertiary))', glow: 'rgba(var(--accent-tertiary), 0.15)' },
   ]
   const color = colors[index % colors.length]
 
@@ -186,12 +186,14 @@ export function Experience() {
     <section id="experience" className="section-padding relative overflow-hidden">
       {/* Background elements with breathing */}
       <motion.div
-        className="absolute top-0 right-0 w-[500px] h-[500px] bg-electric-blue/5 rounded-full blur-3xl"
+        className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-3xl"
+        style={{ background: 'rgba(var(--accent-primary), 0.05)' }}
         animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.5, 0.2], x: [0, 30, 0], y: [0, -20, 0] }}
         transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
       />
       <motion.div
-        className="absolute bottom-1/4 left-0 w-[400px] h-[400px] bg-electric-purple/5 rounded-full blur-3xl"
+        className="absolute bottom-1/4 left-0 w-[400px] h-[400px] rounded-full blur-3xl"
+        style={{ background: 'rgba(var(--accent-secondary), 0.05)' }}
         animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.35, 0.15] }}
         transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
       />
@@ -208,7 +210,8 @@ export function Experience() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="inline-block text-sm font-mono text-electric-blue tracking-wider uppercase px-4 py-1.5 rounded-full border border-electric-blue/20 bg-electric-blue/5"
+            className="inline-block text-sm font-mono tracking-wider uppercase px-4 py-1.5 rounded-full border bg-white/[0.03]"
+            style={{ color: 'rgb(var(--accent-primary))', borderColor: 'rgba(var(--accent-primary), 0.2)' }}
           >
             Experience
           </motion.span>
@@ -227,8 +230,10 @@ export function Experience() {
           <div className="absolute left-4 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-[2px] bg-white/[0.05]">
             <motion.div
               style={{ height: lineHeight }}
-              className="w-full bg-gradient-to-b from-electric-blue via-electric-purple to-electric-cyan"
-            />
+              className="w-full"
+            >
+              <div className="w-full h-full" style={{ background: 'linear-gradient(to bottom, rgb(var(--accent-primary)), rgb(var(--accent-secondary)), rgb(var(--accent-tertiary)))' }} />
+            </motion.div>
           </div>
 
           {/* Experience cards */}

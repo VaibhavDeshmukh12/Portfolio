@@ -4,7 +4,7 @@ import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import { MagneticButton } from '@/components/ui/magnetic-button'
 import { siteConfig } from '@/lib/constants'
-import { Github, Linkedin, Mail, Code2, Send, MessageCircle } from 'lucide-react'
+import { Github, Linkedin, Mail, Code2, Send, MessageCircle, MapPin } from 'lucide-react'
 import { TextScramble } from '@/components/effects/TextScramble'
 import { MagicParticles } from '@/components/effects/MagicParticles'
 import { WordReveal } from '@/components/effects/TextReveal'
@@ -15,6 +15,7 @@ const contactLinks = [
   { icon: Linkedin, href: siteConfig.social.linkedin, label: 'LinkedIn', detail: 'Vaibhav Deshmukh' },
   { icon: Code2, href: siteConfig.social.leetcode, label: 'LeetCode', detail: 'vaibhav_64' },
   { icon: MessageCircle, href: 'https://wa.me/917420950162', label: 'WhatsApp', detail: '+91 74209 50162' },
+  { icon: MapPin, href: 'https://maps.google.com/?q=Pune,India', label: 'Location', detail: 'Pune, India' },
 ]
 
 export function Contact() {
@@ -34,7 +35,7 @@ export function Contact() {
         className="absolute inset-0 flex items-center justify-center"
         style={{ scale: backgroundScale, opacity: backgroundOpacity }}
       >
-        <div className="w-[600px] h-[600px] rounded-full bg-gradient-to-br from-electric-blue/20 via-electric-purple/10 to-electric-cyan/20 blur-3xl" />
+        <div className="w-[600px] h-[600px] rounded-full blur-3xl" style={{ background: 'linear-gradient(to bottom right, rgba(var(--accent-primary), 0.2), rgba(var(--accent-secondary), 0.1), rgba(var(--accent-tertiary), 0.2))' }} />
       </motion.div>
 
       {/* Floating particles */}
@@ -48,7 +49,7 @@ export function Contact() {
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <span className="inline-block text-sm font-mono text-electric-cyan tracking-wider uppercase px-4 py-1.5 rounded-full border border-electric-cyan/20 bg-electric-cyan/5">
+            <span className="inline-block text-sm font-mono tracking-wider uppercase px-4 py-1.5 rounded-full border bg-white/[0.03]" style={{ color: 'rgb(var(--accent-tertiary))', borderColor: 'rgba(var(--accent-tertiary), 0.2)' }}>
               <TextScramble text="Contact" delay={0.2} />
             </span>
           </motion.div>
@@ -95,7 +96,7 @@ export function Contact() {
           >
             <MagneticButton
               href={siteConfig.social.email}
-              className="px-8 py-4 bg-gradient-to-r from-electric-blue/20 to-electric-purple/20 border-white/20 hover:border-white/30"
+              className="px-8 py-4 border-white/20 hover:border-white/30"
             >
               <Send size={16} className="mr-2 inline" />
               <span className="text-white text-base">Get in Touch</span>
@@ -103,7 +104,7 @@ export function Contact() {
           </motion.div>
 
           {/* Contact links grid */}
-          <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-3xl mx-auto">
             {contactLinks.map((link, index) => (
               <motion.a
                 key={link.label}
@@ -123,10 +124,10 @@ export function Contact() {
                 <motion.div
                   whileHover={{ rotate: [0, -10, 10, 0], transition: { duration: 0.5 } }}
                 >
-                  <link.icon size={24} className="text-white/40 group-hover:text-electric-blue transition-colors mx-auto" />
+                  <link.icon size={24} className="text-white/40 group-hover:text-[rgb(var(--accent-primary))] transition-colors mx-auto" />
                 </motion.div>
                 <p className="text-sm font-medium text-white/80 mt-3 text-center">{link.label}</p>
-                <p className="text-xs text-white/40 mt-1 text-center truncate opacity-0 group-hover:opacity-100 transition-opacity duration-300" title={link.detail}>{link.detail}</p>
+                <p className="text-xs text-white/40 mt-1 text-center break-all">{link.detail}</p>
               </motion.a>
             ))}
           </div>

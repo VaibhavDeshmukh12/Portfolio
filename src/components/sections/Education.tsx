@@ -13,9 +13,9 @@ function EducationCard({ edu, index }: { edu: typeof education[0]; index: number
   const isInView = useInView(cardRef, { once: false, margin: '-50px' })
 
   const colors = [
-    { bg: 'bg-electric-blue/10', border: 'border-electric-blue/20', text: 'text-electric-blue', glow: 'rgba(59, 130, 246, 0.15)', hex: '#3b82f6' },
-    { bg: 'bg-electric-purple/10', border: 'border-electric-purple/20', text: 'text-electric-purple', glow: 'rgba(139, 92, 246, 0.15)', hex: '#8b5cf6' },
-    { bg: 'bg-electric-cyan/10', border: 'border-electric-cyan/20', text: 'text-electric-cyan', glow: 'rgba(6, 182, 212, 0.15)', hex: '#06b6d4' },
+    { glow: 'rgba(var(--accent-primary), 0.15)', rgb: 'var(--accent-primary)' },
+    { glow: 'rgba(var(--accent-secondary), 0.15)', rgb: 'var(--accent-secondary)' },
+    { glow: 'rgba(var(--accent-tertiary), 0.15)', rgb: 'var(--accent-tertiary)' },
   ]
   const color = colors[index % colors.length]
 
@@ -40,8 +40,8 @@ function EducationCard({ edu, index }: { edu: typeof education[0]; index: number
           
           {/* Corner accent */}
           <div className="absolute top-0 right-0 w-24 h-24 opacity-20">
-            <div className="absolute top-0 right-0 w-full h-[1px]" style={{ background: `linear-gradient(to left, ${color.hex}, transparent)` }} />
-            <div className="absolute top-0 right-0 h-full w-[1px]" style={{ background: `linear-gradient(to bottom, ${color.hex}, transparent)` }} />
+            <div className="absolute top-0 right-0 w-full h-[1px]" style={{ background: `linear-gradient(to left, rgb(${color.rgb}), transparent)` }} />
+            <div className="absolute top-0 right-0 h-full w-[1px]" style={{ background: `linear-gradient(to bottom, rgb(${color.rgb}), transparent)` }} />
           </div>
 
           <div className="relative z-10 flex items-start gap-4">
@@ -49,13 +49,14 @@ function EducationCard({ edu, index }: { edu: typeof education[0]; index: number
               initial={{ scale: 0, rotate: -180 }}
               animate={isInView ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -180 }}
               transition={{ duration: 0.7, delay: 0.2 + index * 0.2, type: 'spring', stiffness: 180 }}
-              className={`p-3 rounded-xl ${color.bg} border ${color.border} relative`}
+              className="p-3 rounded-xl border relative"
+              style={{ backgroundColor: `rgba(${color.rgb}, 0.1)`, borderColor: `rgba(${color.rgb}, 0.2)` }}
             >
-              <GraduationCap size={24} className={color.text} />
+              <GraduationCap size={24} style={{ color: `rgb(${color.rgb})` }} />
               {/* Pulse ring */}
               <motion.div
                 className="absolute -inset-1 rounded-xl"
-                style={{ border: `1px solid ${color.hex}` }}
+                style={{ border: `1px solid rgba(${color.rgb}, 0.5)` }}
                 animate={{ opacity: [0.5, 0], scale: [1, 1.3] }}
                 transition={{ duration: 2, repeat: Infinity }}
               />
@@ -105,9 +106,9 @@ function EducationCard({ edu, index }: { edu: typeof education[0]; index: number
                   transition={{ delay: 0.6 + index * 0.2, duration: 0.5, type: 'spring' }}
                   className="mt-4 inline-flex items-center gap-2"
                 >
-                  <Award size={14} style={{ color: color.hex }} />
+                  <Award size={14} style={{ color: `rgb(${color.rgb})` }} />
                   <span className="px-3 py-1 text-xs font-mono rounded-full border text-white/70"
-                    style={{ borderColor: `${color.hex}30`, backgroundColor: `${color.hex}10` }}
+                    style={{ borderColor: `rgba(${color.rgb}, 0.2)`, backgroundColor: `rgba(${color.rgb}, 0.06)` }}
                   >
                     {edu.grade}
                   </span>
@@ -129,12 +130,14 @@ export function Education() {
     <section id="education" className="section-padding relative overflow-hidden">
       {/* Background */}
       <motion.div
-        className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-electric-purple/5 rounded-full blur-3xl"
+        className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full blur-3xl"
+        style={{ background: 'rgba(var(--accent-secondary), 0.05)' }}
         animate={{ y: [0, -30, 0], x: [0, 20, 0], opacity: [0.2, 0.5, 0.2] }}
         transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
       />
       <motion.div
-        className="absolute top-1/4 right-0 w-[300px] h-[300px] bg-electric-blue/5 rounded-full blur-3xl"
+        className="absolute top-1/4 right-0 w-[300px] h-[300px] rounded-full blur-3xl"
+        style={{ background: 'rgba(var(--accent-primary), 0.05)' }}
         animate={{ y: [0, 20, 0], opacity: [0.15, 0.35, 0.15] }}
         transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
       />
@@ -153,7 +156,8 @@ export function Education() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="inline-block text-sm font-mono text-electric-purple tracking-wider uppercase px-4 py-1.5 rounded-full border border-electric-purple/20 bg-electric-purple/5"
+            className="inline-block text-sm font-mono tracking-wider uppercase px-4 py-1.5 rounded-full border bg-white/[0.03]"
+            style={{ color: 'rgb(var(--accent-secondary))', borderColor: 'rgba(var(--accent-secondary), 0.2)' }}
           >
             <TextScramble text="Education" delay={0.2} />
           </motion.span>

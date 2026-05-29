@@ -38,9 +38,9 @@ export function SectionDivider({ variant = 'wave' }: { variant?: 'wave' | 'dots'
           style={{ scaleX, opacity }}
         />
         <motion.div
-          className="absolute w-2 h-2 rounded-full bg-electric-blue/60"
-          style={{ opacity }}
-          animate={{ boxShadow: ['0 0 8px rgba(59,130,246,0.4)', '0 0 16px rgba(59,130,246,0.6)', '0 0 8px rgba(59,130,246,0.4)'] }}
+          className="absolute w-2 h-2 rounded-full"
+          style={{ opacity, background: 'rgba(var(--accent-primary), 0.6)' }}
+          animate={{ boxShadow: ['0 0 8px rgba(var(--accent-primary), 0.4)', '0 0 16px rgba(var(--accent-primary), 0.6)', '0 0 8px rgba(var(--accent-primary), 0.4)'] }}
           transition={{ duration: 2, repeat: Infinity }}
         />
       </div>

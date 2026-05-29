@@ -13,8 +13,8 @@ export function GridBackground() {
       />
       {/* Gradient overlays */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-electric-blue/5 rounded-full blur-[120px]" />
-      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-electric-purple/5 rounded-full blur-[120px]" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] rounded-full blur-[120px]" style={{ background: 'rgba(var(--accent-primary), 0.05)' }} />
+      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full blur-[120px]" style={{ background: 'rgba(var(--accent-secondary), 0.05)' }} />
     </div>
   )
 }

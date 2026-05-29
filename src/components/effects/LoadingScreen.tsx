@@ -38,23 +38,27 @@ export function LoadingScreen() {
             {/* Animated rings */}
             <div className="relative w-20 h-20">
               <motion.div
-                className="absolute inset-0 rounded-full border-2 border-electric-blue/30"
+                className="absolute inset-0 rounded-full border-2"
+                style={{ borderColor: 'rgba(var(--accent-primary), 0.3)' }}
                 animate={{ rotate: 360 }}
                 transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
               />
               <motion.div
-                className="absolute inset-2 rounded-full border-2 border-electric-purple/30"
+                className="absolute inset-2 rounded-full border-2"
+                style={{ borderColor: 'rgba(var(--accent-secondary), 0.3)' }}
                 animate={{ rotate: -360 }}
                 transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
               />
               <motion.div
-                className="absolute inset-4 rounded-full border-2 border-electric-cyan/30"
+                className="absolute inset-4 rounded-full border-2"
+                style={{ borderColor: 'rgba(var(--accent-tertiary), 0.3)' }}
                 animate={{ rotate: 360 }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
               />
               {/* Center dot */}
               <motion.div
-                className="absolute inset-0 m-auto w-3 h-3 rounded-full bg-electric-blue"
+                className="absolute inset-0 m-auto w-3 h-3 rounded-full"
+                style={{ background: 'rgb(var(--accent-primary))' }}
                 animate={{ scale: [1, 1.5, 1] }}
                 transition={{ duration: 1, repeat: Infinity }}
               />

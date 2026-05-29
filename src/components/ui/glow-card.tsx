@@ -8,7 +8,7 @@ interface GlowCardProps {
   glowColor?: string
 }
 
-export function GlowCard({ children, className, glowColor = 'rgba(59, 130, 246, 0.15)' }: GlowCardProps) {
+export function GlowCard({ children, className, glowColor }: GlowCardProps) {
   return (
     <div
       className={cn(
@@ -22,11 +22,16 @@ export function GlowCard({ children, className, glowColor = 'rgba(59, 130, 246, 
       <div
         className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-2xl"
         style={{
-          background: `radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), ${glowColor}, transparent 40%)`,
+          background: glowColor
+            ? `radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), ${glowColor}, transparent 40%)`
+            : `radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(var(--accent-primary), 0.15), transparent 40%)`,
         }}
       />
       {/* Top gradient line */}
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-electric-blue/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div
+        className="absolute top-0 inset-x-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        style={{ background: 'linear-gradient(to right, transparent, rgba(var(--accent-primary), 0.5), transparent)' }}
+      />
       <div className="relative z-10">{children}</div>
     </div>
   )

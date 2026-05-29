@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { inter, spaceGrotesk } from '@/styles/fonts'
 import { SmoothScrollProvider } from '@/components/providers/SmoothScrollProvider'
+import { AccentProvider } from '@/components/providers/AccentProvider'
+import { AccentSwitcher } from '@/components/ui/accent-switcher'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -64,9 +66,12 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans bg-background text-foreground overflow-x-hidden`}>
         <a href="#home" className="skip-to-content">Skip to content</a>
-        <SmoothScrollProvider>
-          {children}
-        </SmoothScrollProvider>
+        <AccentProvider>
+          <SmoothScrollProvider>
+            {children}
+          </SmoothScrollProvider>
+          <AccentSwitcher />
+        </AccentProvider>
       </body>
     </html>
   )

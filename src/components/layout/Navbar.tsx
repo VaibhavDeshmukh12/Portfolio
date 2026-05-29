@@ -60,7 +60,8 @@ export function Navbar() {
           <motion.div
             initial={{ opacity: 0, scaleX: 0 }}
             animate={{ opacity: 1, scaleX: 1 }}
-            className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-electric-blue/30 to-transparent"
+            className="absolute bottom-0 left-0 right-0 h-[1px]"
+            style={{ background: 'linear-gradient(to right, transparent, rgba(var(--accent-primary), 0.3), transparent)' }}
           />
         )}
 
@@ -76,7 +77,8 @@ export function Navbar() {
             <span className="text-xl font-display font-bold gradient-text relative">
               VD
               <motion.span
-                className="absolute -inset-2 rounded-lg bg-electric-blue/10 blur-md"
+                className="absolute -inset-2 rounded-lg blur-md"
+                style={{ background: 'rgba(var(--accent-primary), 0.1)' }}
                 initial={{ opacity: 0 }}
                 whileHover={{ opacity: 1 }}
                 transition={{ duration: 0.3 }}
@@ -109,7 +111,8 @@ export function Navbar() {
                   {isActive && (
                     <motion.div
                       layoutId="activeNavSection"
-                      className="absolute inset-0 bg-white/[0.1] rounded-full border border-white/[0.15] shadow-[0_0_15px_rgba(59,130,246,0.15)]"
+                      className="absolute inset-0 bg-white/[0.1] rounded-full border border-white/[0.15]"
+                      style={{ boxShadow: '0 0 15px rgba(var(--accent-primary), 0.15)' }}
                       transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                     />
                   )}
@@ -137,7 +140,8 @@ export function Navbar() {
                   {isActive && (
                     <motion.div
                       layoutId="activeNavDot"
-                      className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-electric-blue"
+                      className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full"
+                      style={{ background: 'rgb(var(--accent-primary))' }}
                       transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                     />
                   )}
@@ -196,7 +200,8 @@ export function Navbar() {
                 >
                   {activeSection === item.href.slice(1) && (
                     <motion.span
-                      className="absolute -left-6 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-electric-blue"
+                      className="absolute -left-6 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full"
+                      style={{ background: 'rgb(var(--accent-primary))' }}
                       layoutId="mobileActiveIndicator"
                     />
                   )}

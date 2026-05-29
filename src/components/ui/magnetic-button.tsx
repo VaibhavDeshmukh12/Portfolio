@@ -45,7 +45,7 @@ export function MagneticButton({ children, className, onClick, href }: MagneticB
       onClick={onClick}
     >
       {/* Glow effect */}
-      <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-electric-blue/20 via-electric-purple/20 to-electric-cyan/20 blur-xl" />
+      <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" style={{ background: 'linear-gradient(to right, rgba(var(--accent-primary), 0.2), rgba(var(--accent-secondary), 0.2), rgba(var(--accent-tertiary), 0.2))' }} />
       <span className="relative z-10 font-medium text-sm">{children}</span>
     </motion.div>
   )

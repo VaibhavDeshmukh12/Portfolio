@@ -43,8 +43,8 @@ export function Projects() {
         className="absolute inset-0 opacity-30"
         style={{ y: backgroundY }}
       >
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-electric-pink/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-electric-purple/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl" style={{ background: 'rgba(var(--accent-secondary), 0.1)' }} />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl" style={{ background: 'rgba(var(--accent-tertiary), 0.1)' }} />
       </motion.div>
 
       <MagicParticles count={15} color="rgba(236, 72, 153, 0.25)" />
@@ -61,7 +61,8 @@ export function Projects() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="inline-block text-sm font-mono text-electric-pink tracking-wider uppercase px-4 py-1.5 rounded-full border border-electric-pink/20 bg-electric-pink/5"
+            className="inline-block text-sm font-mono tracking-wider uppercase px-4 py-1.5 rounded-full border bg-white/[0.03]"
+            style={{ color: 'rgb(var(--accent-secondary))', borderColor: 'rgba(var(--accent-secondary), 0.2)' }}
           >
             <TextScramble text="Projects" delay={0.2} />
           </motion.span>
@@ -98,7 +99,8 @@ export function Projects() {
               {activeFilter === category && (
                 <motion.div
                   layoutId="activeProjectFilter"
-                  className="absolute inset-0 bg-gradient-to-r from-electric-pink/10 to-electric-purple/10 rounded-full border border-white/[0.15] shadow-[0_0_12px_rgba(236,72,153,0.1)]"
+                  className="absolute inset-0 rounded-full border border-white/[0.15]"
+                  style={{ background: 'linear-gradient(to right, rgba(var(--accent-secondary), 0.1), rgba(var(--accent-tertiary), 0.1))', boxShadow: '0 0 12px rgba(var(--accent-secondary), 0.1)' }}
                   transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                 />
               )}
@@ -116,7 +118,8 @@ export function Projects() {
               {activeFilter === category && (
                 <motion.div
                   layoutId="projectFilterDot"
-                  className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-electric-pink"
+                  className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full"
+                  style={{ background: 'rgb(var(--accent-secondary))' }}
                   transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                 />
               )}
@@ -280,7 +283,7 @@ export function Projects() {
                 <ul className="space-y-2">
                   {selectedProject.features.map((f) => (
                     <li key={f} className="flex items-center gap-2 text-sm text-white/60">
-                      <span className="w-1.5 h-1.5 rounded-full bg-electric-blue" />
+                      <span className="w-1.5 h-1.5 rounded-full" style={{ background: 'rgb(var(--accent-primary))' }} />
                       {f}
                     </li>
                   ))}
