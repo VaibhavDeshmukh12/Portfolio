@@ -83,7 +83,7 @@ export default function NotFound() {
           <p><span className="text-red-400/60">Error</span>: ENOENT</p>
           <p className="mt-1">  at resolve (navigation:1:1)</p>
           <p>  at render (portfolio:404:0)</p>
-          <p className="mt-1 text-white/30">// Try going back home</p>
+          <p className="mt-1 text-white/30">{/* Try going back home */}</p>
         </motion.div>
       </div>
     </div>
