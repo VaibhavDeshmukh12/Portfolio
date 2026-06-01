@@ -109,6 +109,15 @@ export const education = [
     type: 'Junior College',
     grade: '82.83%',
   },
+  {
+    id: 3,
+    institution: 'Maharashtra State Board (SSC)',
+    location: 'Chh. Sambhajinagar, Maharashtra',
+    degree: 'Secondary School Certificate (10th)',
+    period: 'June 2018 - March 2020',
+    type: 'School',
+    grade: '92.80%',
+  },
 ]
 
 export const skillCategories = [

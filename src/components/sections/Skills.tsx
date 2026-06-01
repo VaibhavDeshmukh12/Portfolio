@@ -152,7 +152,7 @@ export function Skills() {
           initial={{ opacity: 0, y: 30, filter: 'blur(6px)' }}
           animate={isInView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : { opacity: 0, y: 30, filter: 'blur(6px)' }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-2 mb-12 p-1.5 rounded-full bg-white/[0.02] border border-white/[0.05] w-fit mx-auto"
+          className="flex flex-nowrap justify-start md:justify-center gap-1.5 md:gap-2 mb-12 p-1.5 rounded-2xl md:rounded-full bg-white/[0.02] border border-white/[0.05] max-w-full overflow-x-auto scrollbar-hide mx-auto md:w-fit"
           onMouseLeave={() => setHoveredTab(null)}
         >
           {skillCategories.map((category, catIndex) => (
@@ -165,7 +165,7 @@ export function Skills() {
               transition={{ delay: 0.3 + catIndex * 0.05 }}
               whileTap={{ scale: 0.95 }}
               className={cn(
-                'px-4 py-2 text-sm rounded-full transition-colors duration-200 relative',
+                'px-3 md:px-4 py-1.5 md:py-2 text-xs md:text-sm rounded-full transition-colors duration-200 relative whitespace-nowrap flex-shrink-0',
                 activeCategory === category.id
                   ? 'text-white'
                   : 'text-white/50 hover:text-white'

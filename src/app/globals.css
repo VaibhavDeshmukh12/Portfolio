@@ -104,6 +104,15 @@
   .border-gradient {
     border-image: linear-gradient(135deg, rgba(var(--accent-primary), 0.5), rgba(var(--accent-secondary), 0.5)) 1;
   }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /* Scrollbar styling */

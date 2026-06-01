@@ -151,7 +151,7 @@ export function About() {
                   <div className="space-y-3">
                     {[
                       { label: 'Company', value: 'PTC Software' },
-                      { label: 'Focus', value: 'ThingWorx Composer & Full Stack' },
+                      { label: 'Focus', value: 'ThingWorx & Full Stack' },
                       { label: 'Location', value: 'Pune, India' },
                     ].map((item, i) => (
                       <motion.div
@@ -159,10 +159,10 @@ export function About() {
                         initial={{ opacity: 0, x: 30 }}
                         animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
                         transition={{ delay: 0.6 + i * 0.1, duration: 0.5 }}
-                        className="flex items-center justify-between text-sm"
+                        className="flex items-center justify-between gap-4 text-sm"
                       >
-                        <span className="text-white/40">{item.label}</span>
-                        <span className="text-white/80">{item.value}</span>
+                        <span className="text-white/40 flex-shrink-0">{item.label}</span>
+                        <span className="text-white/80 text-right">{item.value}</span>
                       </motion.div>
                     ))}
                   </div>
@@ -171,7 +171,7 @@ export function About() {
             </motion.div>
 
             {/* Stats grid with count-up animations */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3 md:gap-4">
               {stats.map((stat, i) => (
                 <motion.div
                   key={stat.label}
@@ -188,7 +188,7 @@ export function About() {
                   }}
                   whileHover={{ scale: 1.05, y: -4, transition: { duration: 0.2 } }}
                 >
-                  <GlowCard className="p-6">
+                  <GlowCard className="p-4 md:p-6">
                     <AnimatedCounter
                       target={stat.value}
                       suffix={stat.suffix}
